@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Accueil</title>
+    <style>
+        /* Style général du corps */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        /* Conteneur de l'en-tête */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Style pour le texte "Heure de pointage" */
+        .header h1 {
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        /* Style du bouton */
+        .button-container {
+            margin-top: 10px; /* Un petit écart entre le champ et le bouton */
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Effet au survol du bouton */
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+
+        /* Style du tableau */
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 80%;
+            display: none; /* Le tableau est caché au début */
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+            color: black; /* Couleur du texte dans le tableau */
+        }
+
+        td:nth-child(1) {
+            background-color: #e8f5e9; /* Change le fond des cellules contenant l'heure */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Heure de pointage</h1>
+        
+        <div class="button-container">
+            <button onclick="pointage()">Pointer</button>
+        </div>
+
+        <!-- Tableau pour afficher l'heure de pointage -->
+        <table id="pointageTable">
+            <thead>
+                <tr>
+                    <th>Heure de pointage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les heures de pointage seront insérées ici -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Fonction pour ajouter l'heure de pointage dans le tableau
+        function pointage() {
+            var currentDate = new Date(); // Crée un objet Date pour récupérer l'heure actuelle
+            var hours = currentDate.getHours().toString().padStart(2, '0'); // Récupère l'heure au format 2 chiffres
+            var minutes = currentDate.getMinutes().toString().padStart(2, '0'); // Récupère les minutes au format 2 chiffres
+            var time = hours + ':' + minutes; // Formate l'heure comme HH:MM
+
+            // Ajoute l'heure au tableau
+            var table = document.getElementById('pointageTable');
+            var tbody = table.getElementsByTagName('tbody')[0]; // Accède à la section du tableau où les données seront ajoutées
+
+            // Crée une nouvelle ligne et insère l'heure de pointage
+            var row = tbody.insertRow();
+            var cell = row.insertCell(0);
+            cell.textContent = time;
+
+            // Affiche le tableau si il n'est pas encore visible
+            table.style.display = 'table';
+        }
+    </script>
+</body>
+</html>
